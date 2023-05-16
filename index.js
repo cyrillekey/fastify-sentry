@@ -58,16 +58,16 @@ function sentryConnector(fastify, opts, next) {
     return
   })
 
-  fastify.addHook('onResponse', async (request, reply) => {
-    setImmediate(() => {
-      const transaction = request.sentryTransaction
-      transaction.setData('url', request.url)
-      transaction.setData('query', request.query)
-      transaction.setHttpStatus(reply.statusCode)
-      transaction.finish()
-    })
-    return
-  })
+//   fastify.addHook('onResponse', async (request, reply) => {
+//     setImmediate(() => {
+//       const transaction = request.sentryTransaction
+//       transaction.setData('url', request.url)
+//       transaction.setData('query', request.query)
+//       transaction.setHttpStatus(reply.statusCode)
+//       transaction.finish()
+//     })
+//     return
+//   })
 
   fastify.setErrorHandler((error, request, reply) => {
     if (opts.errorFilter && ! opts.errorFilter(error, request)) {
